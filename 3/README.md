@@ -1,3 +1,3 @@
 # 3
 
-A description of this package.
+Cammand-line-tool для отображения репозиториев GitHub-пользователя
