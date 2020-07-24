@@ -48,6 +48,8 @@ class LoginCheckerTests: XCTestCase {
         XCTAssertFalse(LoginChecker.isValid(login: "Strong:Guy"))
         XCTAssertFalse(LoginChecker.isValid(login: "Strong;Woman"))
         XCTAssertFalse(LoginChecker.isValid(login: "#Megacoder"))
+        XCTAssertFalse(LoginChecker.isValid(login: "🍀Clever"))
+        XCTAssertFalse(LoginChecker.isValid(login: "🍀🐉🔥"))
     }
     
     func testLogin_containsEmailCharacters_valid() throws {
