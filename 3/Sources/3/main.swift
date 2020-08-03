@@ -1,8 +1,9 @@
 import Alamofire
 import Foundation
 
-func queryRepositories(for userName: String, withTimeout seconds: Double) {
-    let semaphore = DispatchSemaphore(value: 0)
+func queryRepositories(for userName: String,
+                       withTimeout seconds: Double,
+                       onComplete: @escaping () -> Void) {
     let encodedUserName = userName.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed)!
     AF.request("https://api.github.com/users/\(encodedUserName)/repos",
                method: .get,
@@ -11,7 +12,7 @@ func queryRepositories(for userName: String, withTimeout seconds: Double) {
         .validate()
         .response(queue: DispatchQueue.global(qos: .utility)) { response in
             defer {
-                semaphore.signal()
+                onComplete()
             }
             let repositoriesResponse = RepositoriesParser.parse(dataReposne: response)
             switch repositoriesResponse {
@@ -23,8 +24,6 @@ func queryRepositories(for userName: String, withTimeout seconds: Double) {
                 print(error.description)
             }
         }
-    
-    _ = semaphore.wait(timeout: .distantFuture)
 }
 
 print("Type github-user name here, please")
@@ -33,6 +32,8 @@ guard let githubUserName = readLine(), !githubUserName.isEmpty else {
 }
 print("Repositories owned by \(githubUserName) :")
 
-queryRepositories(for: githubUserName, withTimeout: 10)
+queryRepositories(for: githubUserName, withTimeout: 10) {
+    exit(0)
+}
 
-
+RunLoop.main.run()
