@@ -23,7 +23,7 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.addSubview(tableView)
-        tableView.matchSuperview()
+        tableView.matchSafeArea()
         tableView.delegate = self
         tableView.dataSource = tableAdapter
         
