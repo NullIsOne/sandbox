@@ -10,21 +10,15 @@ import UIKit
 import Foundation
 
 final class ImageURLSessionDownloader: ImageDownloader {
-    /// - Возможные улучшения
-    /// * Добавить кэширование загруженных картинок
-    /// * Добавить префетчинг (UITableViewDataSourcePrefetching) в ViewController и заранее заполнять кэш
-    /// * Посчитал, что это будет излишним, т.к. в задаче необходимость кэширования не упомянута
-    func downloadImage(withURL url: URL, forCell cell: UITableViewCell) {
-        cell.imageView?.image = nil
-        URLSession.shared.dataTask(with: url) { [weak cell] data, _, _ in
+    func downloadImage(withURL url: URL, toTarget target: ImageTarget) {
+        URLSession.shared.dataTask(with: url) { [weak target] data, _, _ in
             guard let data = data,
                 let image = UIImage(data: data) else {
                 return
             }
-            DispatchQueue.main.async { [weak cell] in
-                cell?.imageView?.image = image
-                cell?.setNeedsLayout()
+            DispatchQueue.main.async { [weak target] in
+                target?.updateImage(image)
             }
-            }.resume()
+        }.resume()
     }
 }

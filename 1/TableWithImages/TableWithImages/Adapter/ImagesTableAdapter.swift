@@ -25,9 +25,16 @@ final class ImagesTableAdapter: TableAdapter<Int> {
                 ?? UITableViewCell(style: .default, reuseIdentifier: Constants.cellIdentifier)
             
             let imageUrl = factory.getImage(urlFor: item)
-            downloader.downloadImage(withURL: imageUrl, forCell: cell)
+            downloader.downloadImage(withURL: imageUrl, toTarget: cell)
             return cell
         })
     }
     
+}
+
+extension UITableViewCell: ImageTarget {
+    func updateImage(_ image: UIImage) {
+        imageView?.image = image
+        setNeedsLayout()
+    }
 }

@@ -8,6 +8,10 @@
 
 import UIKit
 
+protocol ImageTarget: class {
+    func updateImage(_ image: UIImage)
+}
+
 protocol ImageDownloader {
-    func downloadImage(withURL url: URL, forCell cell: UITableViewCell)
+    func downloadImage(withURL url: URL, toTarget target: ImageTarget)
 }
