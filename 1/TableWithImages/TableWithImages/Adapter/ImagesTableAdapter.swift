@@ -8,7 +8,7 @@
 
 import UIKit
 
-final class ImagesAdapter: TableAdapter<Int> {
+final class ImagesTableAdapter: TableAdapter<Int> {
     
     private enum Constants {
         static let cellIdentifier = "DefaultCell"

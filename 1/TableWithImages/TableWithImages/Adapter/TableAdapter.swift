@@ -8,11 +8,6 @@
 
 import UIKit
 
-protocol Adapter {
-    associatedtype Item
-    var items: [Item] { get set }
-}
-
 class TableAdapter<T>: NSObject, Adapter, UITableViewDataSource {
     typealias Item = T
     

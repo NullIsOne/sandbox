@@ -17,13 +17,13 @@ class ViewController: UIViewController {
         return $0
     }(UITableView())
         
-    private let tableAdapter: TableAdapter = ImagesAdapter(factory: ImagePlaceholderURLFactory(width: 375, height: 150),
-                                                           downloader: ImageURLSessionDownloader())
+    private let tableAdapter: TableAdapter = ImagesTableAdapter(factory: ImagePlaceholderURLFactory(width: 375, height: 150),
+                                                                downloader: ImageURLSessionDownloader())
     
     override func viewDidLoad() {
         super.viewDidLoad()
         view.addSubview(tableView)
-        tableView.frame = view.frame
+        tableView.matchSuperview()
         tableView.delegate = self
         tableView.dataSource = tableAdapter
         
