@@ -21,7 +21,6 @@ class ImagesCollectionController: UIViewController {
         layout.scrollDirection = .vertical
         layout.itemSize = CGSize(width: UIScreen.main.bounds.width - 2 * Constants.cellOffset,
                                  height: Constants.cellHeight)
-        print("SBX screen width \(UIScreen.main.bounds.width)")
         layout.sectionInset = UIEdgeInsets(top: Constants.sectionInsetVertical,
                                            left: 0,
                                            bottom: Constants.sectionInsetVertical,
