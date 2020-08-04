@@ -1,14 +1,14 @@
 //
-//  ViewController.swift
+//  TableViewController.swift
 //  TableWithImages
 //
-//  Created by Nikita Korobeinikov on 23.07.2020.
+//  Created by Nikita Korobeinikov on 04.08.2020.
 //  Copyright © 2020 NullIsOne. All rights reserved.
 //
 
 import UIKit
 
-class ViewController: UIViewController {
+class ImagesTableController: UIViewController {
         
     private let tableView: UITableView = {
         $0.separatorStyle = .none
@@ -33,7 +33,7 @@ class ViewController: UIViewController {
 
 }
 
-extension ViewController: UITableViewDelegate {
+extension ImagesTableController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         75
     }
