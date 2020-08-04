@@ -15,7 +15,7 @@ final class ImageCollectionCell: UICollectionViewCell, CollectionCell {
     private lazy var imageDownloader: ImageDownloader = ImageURLSessionDownloader()
     
     private let imageView: UIImageView = {
-        $0.contentMode = .scaleAspectFit
+        $0.contentMode = .scaleToFill
         return $0
     }(UIImageView())
     

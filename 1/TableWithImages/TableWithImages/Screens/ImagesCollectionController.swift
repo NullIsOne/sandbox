@@ -12,7 +12,7 @@ class ImagesCollectionController: UIViewController {
     
     fileprivate enum Constants {
         static let cellOffset: CGFloat = 24
-        static let cellHeight: CGFloat = 200
+        static let cellHeight: CGFloat = 300
         static let sectionInsetVertical: CGFloat = 8
     }
     
@@ -21,6 +21,7 @@ class ImagesCollectionController: UIViewController {
         layout.scrollDirection = .vertical
         layout.itemSize = CGSize(width: UIScreen.main.bounds.width - 2 * Constants.cellOffset,
                                  height: Constants.cellHeight)
+        print("SBX screen width \(UIScreen.main.bounds.width)")
         layout.sectionInset = UIEdgeInsets(top: Constants.sectionInsetVertical,
                                            left: 0,
                                            bottom: Constants.sectionInsetVertical,
@@ -44,9 +45,27 @@ class ImagesCollectionController: UIViewController {
         view.addSubview(collection)
         collection.matchSafeArea()
         collection.dataSource = collectionAdapter
-        
+        collection.delegate = self
         collectionAdapter.items = Array(1...200)
         collection.reloadData()
     }
 
+}
+
+extension ImagesCollectionController: UICollectionViewDelegateFlowLayout {
+    
+    func collectionView(_ collectionView: UICollectionView,
+                        layout collectionViewLayout: UICollectionViewLayout,
+                        sizeForItemAt indexPath: IndexPath) -> CGSize {
+        switch UIApplication.shared.statusBarOrientation {
+        case .landscapeLeft, .landscapeRight:
+            return CGSize(width: UIScreen.main.bounds.width/2 - 4 * Constants.cellOffset,
+                          height: Constants.cellHeight/2)
+        case .portrait, .portraitUpsideDown, .unknown:
+            return CGSize(width: UIScreen.main.bounds.width - 2 * Constants.cellOffset,
+                          height: Constants.cellHeight)
+        }
+        
+    }
+    
 }
