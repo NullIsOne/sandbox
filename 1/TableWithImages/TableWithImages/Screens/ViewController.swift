@@ -58,7 +58,7 @@ extension ViewController: UITableViewDelegate {
             present(ImagesCollectionController(), animated: true, completion: nil)
         }
         
-        dese
+        tableView.deselectRow(at: indexPath, animated: true)
         
     }
 }
